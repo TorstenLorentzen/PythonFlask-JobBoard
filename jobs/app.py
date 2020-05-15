@@ -19,14 +19,14 @@ def execute_sql(sql, values = (), commit=False, single=False):
         results  = connection.commit()
     else:
         cursor.fetchone() if single else cursor.fetchall()
-    cursor.close
+    cursor.close()
     return results
 
 @app.teardown_appcontext
 def close_connection(exception):
     connection = getattr(g,'_connection', None)
-    if connection != None:
-        connection.close
+    if connection is not None:
+        connection.close()
 
 
 @app.route('/')
